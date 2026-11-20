@@ -1,7 +1,5 @@
 # My agent plan
 
-Fill in the brackets before delegation. This is a template, not a completed plan.
-
 - Dispatcher builder owns dispatcher.py: Implement choose_elevator using rules.eligible_ids and my
   POLICY.md, in this order: 
   

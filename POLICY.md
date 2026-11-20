@@ -1,7 +1,5 @@
 # My dispatch policy
 
-Fill in this template yourself before asking the builders to implement it. Short bullets and a small table are enough. You may discuss ideas or ask AI to challenge them, but make and explain your own choices.
-
 ## Priorities
 
 - What I prioritise: Using an elevator that is already moving in the caller's direction, so its existing journey is shared and the idle elevator stays free for other calls.
