@@ -8,7 +8,8 @@ Fill in this template yourself before asking the builders to implement it. Short
 - My exact selection rule: 
   1. If no elevator is eligible → WAIT (Decision(None, reason)).
   2. If only one is eligible → select it.
-  3. If both are eligible → prefer the one already moving in the request's direction over an idle one.
+  3. If both are eligible and exactly one is moving in the request's direction while the other
+     is idle → select the moving one. (If both are moving, or both idle, go to rule 4.)
   4. If both are still equal (both moving, or both idle) → select the one with the smaller
      floor distance: abs(elevator.floor - request.floor).
 - My deterministic tie-breaker: If the distance is also equal → select A (alphabetical ID).
