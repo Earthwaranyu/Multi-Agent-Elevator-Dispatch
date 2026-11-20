@@ -3,9 +3,35 @@ from dispatcher import choose_elevator
 from scenarios import SCENARIOS
 from models import Decision
 
+
+def _format_elevator(elevator) -> str:
+    """Describe one elevator snapshot for display (no selection logic)."""
+    stops = ", ".join(str(stop) for stop in elevator.stops) if elevator.stops else "none"
+    return (
+        f"  Elevator {elevator.id}: floor {elevator.floor}, "
+        f"direction {elevator.direction}, load {elevator.load_kg} kg, stops: {stops}"
+    )
+
+
 def run_scenarios(scenarios, output_fn=print) -> list[Decision]:
     """Show each snapshot, call the dispatcher once, display and return decisions."""
-    raise NotImplementedError("Implement the scenario display")
+    decisions: list[Decision] = []
+    for scenario in scenarios:
+        output_fn(f"=== {scenario.name} ===")
+        for elevator in scenario.elevators:
+            output_fn(_format_elevator(elevator))
+        request = scenario.request
+        output_fn(f"  Request: floor {request.floor}, direction {request.direction}")
+
+        decision = choose_elevator(scenario.elevators, scenario.request)
+
+        selected = decision.elevator_id if decision.elevator_id is not None else "WAIT"
+        output_fn(f"Selected: {selected}")
+        output_fn(f"Reason: {decision.reason}")
+        output_fn("")
+        decisions.append(decision)
+    return decisions
+
 
 if __name__ == "__main__":
     run_scenarios(SCENARIOS)
